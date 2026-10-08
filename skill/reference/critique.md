@@ -5,7 +5,7 @@ Resolve one stable target, run two independent assessments, synthesize a design 
 ### Hard Invariants
 
 - Assessment A (design review) and Assessment B (detector/browser evidence) are both required.
-- Assessment A and B MUST run as two isolated sub-agents whenever a sub-agent/Task tool is exposed. Running them inline in this context is "possible" but is NOT permitted; it is a degraded run. Inline is allowed ONLY when no sub-agent tool exists (or the user declined, on harnesses that ask).
+- Assessment A and B MUST run as two isolated sub-agents whenever a sub-agent/Task tool is exposed and the target is page-scale (a page, a flow, or several views). Running them inline in this context is "possible" but is NOT permitted; it is a degraded run. Inline is allowed ONLY when no sub-agent tool exists (or the user declined, on harnesses that ask). A single component or small file runs them sequentially in this context; that is a normal run, not a degraded one.
 - If you degrade for any reason, the report's first line MUST be a banner: `⚠️ DEGRADED: single-context (<reason>)`. A silent degraded critique is a failed critique.
 - Assessment A must finish before detector findings enter the parent synthesis context. Detector output is deterministic, but it still anchors judgment.
 - A skipped detector is a failed critique run unless `impeccable detect` is missing or crashes after a real attempt.
@@ -30,16 +30,16 @@ Resolve one stable target, run two independent assessments, synthesize a design 
 
 ### Assessment Orchestration
 
-Delegate Assessment A and Assessment B to separate sub-agents. They must not see each other's output. Do not show findings to the user until synthesis.
+Delegate Assessment A and Assessment B to separate sub-agents for a page-scale target. They must not see each other's output. Do not show findings to the user until synthesis.
 
 Sub-agent gate (all harnesses):
-- Unless a harness-specific gate below overrides this, spawn A and B as two isolated, parallel sub-agents whenever a sub-agent/Task tool is exposed. This is the default and is mandatory; do not run them inline because it is faster.
+- Unless a harness-specific gate below overrides this, spawn A and B for a page-scale target as two isolated, parallel sub-agents whenever a sub-agent/Task tool is exposed. This is the default and is mandatory; do not run them inline because it is faster.
 - "Unavailable" means exactly one thing: no sub-agent/Task tool is exposed in this session (or, on harnesses that ask, the user declined). It does not mean inconvenient.
-- If and only if sub-agents are unavailable, fall back sequentially: finish and record Assessment A, then run Assessment B, then synthesize, and emit the degraded banner.
+- If and only if sub-agents are unavailable for a page-scale target, fall back sequentially: finish and record Assessment A, then run Assessment B, then synthesize, and emit the degraded banner. A small target runs this sequence as a normal run, without the banner.
 - Whichever path you take, declare it in the report header (see Report header provenance). Skipping sub-agents without the banner is the most common failure of this command.
 
 <codex>
-Codex sub-agent gate (overrides the default above; Codex's permission model requires asking before spawning):
+Codex sub-agent gate (page-scale targets; overrides the default above; Codex's permission model requires asking before spawning):
 - Asking is the normal path, not a degradation. Approving and spawning is the dual-agent path; do not emit the degraded banner just for asking.
 - If `spawn_agent` is exposed and the user explicitly allowed sub-agents, delegation, or parallel agent work, spawn A and B immediately.
 - If `spawn_agent` is exposed but the user did not explicitly allow sub-agents, ask exactly once: "Impeccable critique is designed to run two independent sub-agents for an unanchored assessment. May I use sub-agents for this critique?" Then stop until the user answers.
@@ -115,6 +115,7 @@ Structure your feedback as a design director would:
 
 The report's first line MUST declare how the assessments were run, so a degraded run is never silent:
 - Dual-agent: `Method: dual-agent (A: <agent-id> · B: <agent-id>)`
+- Sequential (small target): `Method: sequential (small target)`
 - Degraded: `⚠️ DEGRADED: single-context (<reason, e.g. no sub-agent tool exposed>)`
 
 #### Design Health Score
@@ -170,7 +171,7 @@ For each issue, tag with **P0-P3 severity** (see [Issue Severity below](#issue-s
 #### Persona Red Flags
 > *Consult the [Personas reference](#persona-based-design-testing) below.*
 
-Auto-select 2-3 personas most relevant to this interface type (use the selection table in the reference). If `{{config_file}}` contains a `## Design Context` section from `impeccable init`, also generate 1-2 project-specific personas from the audience/brand info.
+Auto-select 2-3 personas most relevant to this interface type (use the selection table in the reference). If PRODUCT.md contains a `## Users` section from `impeccable init`, also generate 1-2 project-specific personas from the audience/brand info.
 
 For each selected persona, walk through the primary user action and list specific red flags found:
 
@@ -822,7 +823,7 @@ Choose personas based on the interface type:
 
 #### Project-Specific Personas
 
-If `{{config_file}}` contains a `## Design Context` section (generated by `impeccable init`), derive 1–2 additional personas from the audience and brand information:
+If PRODUCT.md contains a `## Users` section (generated by `impeccable init`), derive 1–2 additional personas from the audience and brand information:
 
 1. Read the target audience description
 2. Identify the primary user archetype not covered by the 5 predefined personas
@@ -831,11 +832,11 @@ If `{{config_file}}` contains a `## Design Context` section (generated by `impec
 ```
 ##### [Role]: "[Name]"
 
-**Profile**: [2-3 key characteristics derived from Design Context]
+**Profile**: [2-3 key characteristics derived from PRODUCT.md]
 
 **Behaviors**: [3-4 specific behaviors based on the described audience]
 
 **Red Flags**: [3-4 things that would alienate this specific user type]
 ```
 
-Only generate project-specific personas when real Design Context data is available. Don't invent audience details; use the 5 predefined personas when no context exists.
+Only generate project-specific personas when real PRODUCT.md data is available. Don't invent audience details; use the 5 predefined personas when no context exists.
