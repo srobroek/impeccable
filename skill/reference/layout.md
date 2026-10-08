@@ -12,7 +12,7 @@ Preserve the established visual world. A layout command changes structure inside
 
 ## Two isolated assessments
 
-When a sub-agent tool is available and permitted, run these independently; otherwise run them yourself in this order.
+A local fix (one component's spacing or grouping) answers only the questions it touches and scans once after the edit. When a sub-agent tool is available and permitted, run these independently; otherwise run them yourself in this order.
 
 1. **Layout assessment:** inspect representative states and viewports. Answer every question below with rendered or source evidence:
    - **Reading order:** Apply the squint test. With detail blurred, can you still identify the primary element, the secondary element, and the major groups in order?
@@ -69,7 +69,7 @@ Variation is not a goal by itself. Repetition should support recognition; break 
 - Keyboard, touch, and assistive-technology order agree with the visual order.
 - The final mechanical scan has no unexplained findings.
 
-Answer each item with rendered or source evidence, then rerun the scan. Do not substitute a bare “yes” for verification.
+Answer each item your change touched with rendered or source evidence, then rerun the scan. Do not substitute a bare “yes” for verification.
 
 When the structure holds, hand off to `{{command_prefix}}impeccable polish`.
 

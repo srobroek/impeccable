@@ -12,7 +12,7 @@ If typography replacement would create a new identity, route through [new-work.m
 
 ## Two isolated assessments
 
-When a sub-agent tool is available and permitted, run these independently; otherwise run them yourself in this order. Do not let detector findings anchor the design assessment.
+A local fix (one role's weight, one measure, one fallback stack) answers only the questions it touches and scans once after the edit. When a sub-agent tool is available and permitted, run these independently; otherwise run them yourself in this order. Do not let detector findings anchor the design assessment.
 
 1. **Typographic assessment:** inspect representative pages and styles. Answer every question below with a file, selector, or computed value:
    - **Authority and fit:** Which faces, weights, and roles are established? Do they fit the product and selected world, or are they unexamined defaults? Is every family necessary?
@@ -65,7 +65,7 @@ Do not make type decorative at the expense of comprehension, or introduce a seco
 - Zoom, text scaling, focus, contrast, and reduced viewport paths remain usable.
 - The final mechanical scan has no unexplained findings.
 
-Answer each item with rendered or source evidence, then rerun the scan. Do not substitute a bare “yes” for verification.
+Answer each item your change touched with rendered or source evidence, then rerun the scan. Do not substitute a bare “yes” for verification.
 
 When the hierarchy holds, hand off to `{{command_prefix}}impeccable polish`.
 
