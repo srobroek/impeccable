@@ -1217,4 +1217,11 @@ describe('live-browser source contracts', () => {
       assert.doesNotMatch(handler, /e\.key === 'Enter'(?! && !isImeKeydown\(e\))/);
     }
   });
+
+  it('reads localStorage for the session helper inside a try', () => {
+    // A denied store throws on the property read itself; unguarded, init
+    // aborts with __IMPECCABLE_LIVE_INIT__ still true and never retries.
+    assert.doesNotMatch(SOURCE, /storage: localStorage,/);
+    assert.match(SOURCE, /try \{ liveStorage = window\.localStorage; \} catch/);
+  });
 });

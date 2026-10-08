@@ -10,7 +10,10 @@
 
   function createLiveBrowserSessionState({ prefix, storage, idFactory }) {
     if (!prefix) throw new Error('prefix required');
-    const store = storage || root.localStorage;
+    let store = storage;
+    if (!store) {
+      try { store = root.localStorage; } catch { store = null; /* storage denied */ }
+    }
     const makeId = idFactory || function () { return Math.random().toString(16).slice(2, 10); };
     const sessionKey = prefix + '-session';
     const handledKey = sessionKey + '-handled';

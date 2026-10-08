@@ -61,9 +61,11 @@
   const IMPECCABLE_COMMAND = (window.__IMPECCABLE_COMMAND_PREFIX__ || '/') + 'impeccable';
   const PICK_CURSOR_STYLE_ID = PREFIX + '-pick-cursor-style';
   const MANUAL_APPLY_STATE_TTL_MS = 15 * 60 * 1000;
+  let liveStorage = null;
+  try { liveStorage = window.localStorage; } catch { /* storage denied */ }
   const sessionState = window.__IMPECCABLE_LIVE_SESSION__?.createLiveBrowserSessionState({
     prefix: PREFIX,
-    storage: localStorage,
+    storage: liveStorage,
     idFactory: () => crypto.randomUUID().replace(/-/g, '').slice(0, 8),
   });
   if (!sessionState) {
