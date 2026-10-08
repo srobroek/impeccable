@@ -1,5 +1,7 @@
 Designs that only work with perfect data aren't production-ready. Harden the interface against the inputs, errors, languages, and network conditions that real users will throw at it.
 
+Server-side validation, rate limiting, localization, and offline support are considerations, not defaults: handle what the interface shows (a 429 message, a label that wraps in translation) and report the rest instead of building it unasked.
+
 ## Assess Hardening Needs
 
 Identify weaknesses and edge cases:
@@ -231,7 +233,7 @@ t('items', { count }) // Handles complex plural rules
 - Pattern matching
 - Custom validation rules
 
-**Server-side validation** (always):
+**Server-side validation** (consideration):
 - Never trust client-side only
 - Validate and sanitize all inputs
 - Protect against injection attacks
@@ -296,6 +298,8 @@ const throttledScroll = throttle(handleScroll, 100);
 
 ## Testing Strategies
 
+Pick the tests that match the change and the project's existing setup.
+
 **Manual testing**:
 - Test with extreme data (very long, very short, empty)
 - Test in different languages
@@ -317,7 +321,7 @@ const throttledScroll = throttle(handleScroll, 100);
 
 **NEVER**:
 - Assume perfect input (validate everything)
-- Ignore internationalization (design for global)
+- Ignore internationalization
 - Leave error messages generic ("Error occurred")
 - Forget offline scenarios
 - Trust client-side validation alone
