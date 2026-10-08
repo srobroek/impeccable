@@ -162,7 +162,7 @@ Sources in priority order: DESIGN.md's visual system fields; CSS custom properti
 
 **Default:** compare each variant against the Phase A lock; palette, type voice, or rhetoric drift means it crossed into departure by accident: rework. Then confirm three different primary axes; three "tighter density" variants is failure. **Departure:** two passes, family before sentence. Family pass (non-negotiable): label each variant with a concrete family of your own choosing; shared or interchangeable labels mean rework. Sentence pass: three one-line descriptions side by side; two that rhyme mean rework. When the primary axis is color or theme, the trio must not share theme + dominant hue: three color worlds, not three shades.
 
-**Action-specific invocations** must vary along the action's dimension:
+**Action-specific invocations** must vary along the action's dimension (in default mode, within the available faces and existing tokens):
 
 - `bolder`: amplify a different dimension per variant (scale / saturation / structural change).
 - `quieter`: pull back a different dimension (color / ornament / spacing).
