@@ -21,7 +21,7 @@ Skipping this step risks building something embarrassing that needs to be thrown
 
 ### Iterate with Browser Automation
 
-Technically ambitious effects almost never work on the first try. You MUST actively use browser automation tools to preview your work, visually verify the result, and iterate. Do not assume the effect looks right, check it. Expect multiple rounds of refinement. The gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
+Technically ambitious effects almost never work on the first try. You MUST actively use browser automation tools to preview your work, visually verify the result, and iterate. Do not assume the effect looks right, check it. Keep to bounded passes: inspect once in a batched round, fix everything it shows in one batch, confirm with at most one more round, and stop. The gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
 
 ---
 
